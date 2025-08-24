@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fashion</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    /* inline icons */
+    .icon {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* flying image container */
+    .flying {
+      position: fixed;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="container header">
+    <div class="brand">
+      <div class="logo">FA</div>
+      <div class="title">
+        <h1>Fashion Accessories</h1>
+        <p class="hint">Hiện Đại-Châu Âu</p>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <input class="input" id="search" placeholder="Tìm sản phẩm..." aria-label="Tìm sản phẩm" />
+      <select class="select input" id="filterCategory" aria-label="Lọc danh mục">
+        <option value="all">Tất cả danh mục</option>
+      </select>
+      <button class="icon-btn" id="accountBtn">Đăng nhập</button>
+      <button class="icon-btn" id="cartBtn" aria-haspopup="true" aria-controls="cartDrawer" aria-expanded="false">
+        <span id="cartIcon">Giỏ (<span id="cartCount">0</span>)</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="left">
+        <h2>Khám phá sản phẩm độc đáo</h2>
+        <p class="hint">Bộ sưu tập sản phẩm được chọn lọc, trải nghiệm mượt mà với chuyển cảnh 3D.</p>
+        <div class="carousel">
+          <div class="carousel__track">
+            <div class="carousel__slide active">
+              <img
+                src="https://images.ctfassets.net/xa93kvziwaye/1JUfSiy7t2J3snzS8V24zE/960ac78d7e6118d6a8849d2089da9397/hero-image_hands-on-with-the-logitech-g502-x-plus-wireless-rgb-gaming-mouse.jpg"
+                alt="Sản phẩm 1" />
+              <div class="carousel__caption">
+                <h2>Khám phá sản phẩm độc đáo</h2>
+                <p>Bộ sưu tập được chọn lọc, mang lại trải nghiệm mượt mà với hiệu ứng 3D.</p>
+                <button>Khám phá ngay</button>
+              </div>
+            </div>
+
+            <div class="carousel__slide">
+              <img src="https://cdn.mos.cms.futurecdn.net/GsUXYTH9xYkmMNFhGnDQXm-1200-80.jpg" alt="Sản phẩm 2" />
+              <div class="carousel__caption">
+                <h2>Sáng tạo trong từng chi tiết</h2>
+                <p>Sự kết hợp hoàn hảo giữa công nghệ và thiết kế hiện đại.</p>
+                <button>Xem chi tiết</button>
+              </div>
+            </div>
+
+            <div class="carousel__slide">
+              <img src="https://pics.craiyon.com/2023-09-28/e7801e69b6794c31b6c3245932668bb3.webp" alt="Sản phẩm 3" />
+              <div class="carousel__caption">
+                <h2>Trải nghiệm không giới hạn</h2>
+                <p>Hiệu ứng chuyển cảnh mượt mà, đẳng cấp như Apple website.</p>
+                <button>Mua ngay</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal chi tiết sản phẩm -->
+          <div id="productModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <img id="modal-img" src="" alt="Product Image" class="product-img" />
+              <h2 id="modal-title"></h2>
+              <p><strong>Danh mục:</strong> <span id="modal-category"></span></p>
+              <p><strong>Giá:</strong> <span id="modal-price"></span></p>
+              <p><strong>Số lượng:</strong> <span id="modal-qty"></span></p>
+            </div>
+          </div>
+
+
+
+          <!-- Nút điều khiển -->
+          <button class="carousel__btn prev">&#10094;</button>
+          <button class="carousel__btn next">&#10095;</button>
+        </div>
+
+      </div>
+      <div class="right shimmer">
+        <div style="text-align:center;">
+          <div style="font-weight:800;font-size:18px">Ưu đãi HOT</div>
+          <div class="hint">Giảm giá tới 30%</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="filters">
+      <div class="hint">Sắp xếp:</div>
+      <select id="sort" class="input" aria-label="Sắp xếp">
+        <option value="default">Mặc định</option>
+        <option value="price-asc">Giá: thấp → cao</option>
+        <option value="price-desc">Giá: cao → thấp</option>
+      </select>
+
+      <div style="flex:1;"></div>
+
+      <button class="btn" id="clearFilters">Làm mới</button>
+      <a class="btn ghost" href="admin.html">Trang Admin</a>
+    </section>
+
+    <section id="productGrid" class="products" aria-live="polite"></section>
+
+    <div class="footer-note">© 2025 Shop FA — CAPSTONE SASS</div>
+  </main>
+
+  <!-- Cart Drawer -->
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-header">
+      <div>
+        <strong>Giỏ hàng</strong>
+        <div class="hint" id="cartSummary">0 sản phẩm</div>
+      </div>
+      <div>
+        <button class="btn ghost" id="clearCart">Clear</button>
+        <button class="btn" id="checkoutBtn">Thanh toán</button>
+      </div>
+    </div>
+
+    <div id="cartItems" class="cart-items"></div>
+
+    <div class="cart-footer">
+      <div class="hint">Tổng:</div>
+      <div style="font-weight:900" id="cartTotal">0₫</div>
+    </div>
+  </aside>
+
+  <!-- flying image container -->
+  <div id="flyingRoot" class="flying" aria-hidden="true"></div>
+
+  <!-- toast placeholder -->
+  <div id="toastRoot" aria-hidden="true"></div>
+
+  <script src="js/app.js"></script>
+</body>
+
+</html>

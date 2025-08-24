@@ -1,0 +1,39 @@
+// Animations & keyframes
+@keyframes float-up {
+  0% { transform: translateY(6px); opacity: 0.95; }
+  50% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(6px); opacity: 0.95; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pop {
+  0% { transform: scale(.96); opacity: 0; }
+  60% { transform: scale(1.025); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes flyToCart {
+  0% { transform: translate3d(var(--sx,0), var(--sy,0), 0) scale(1); opacity: 1; }
+  60% { transform: translate3d(calc(var(--tx) * .6), calc(var(--ty) * .6 - 20px), -60px) scale(.7); opacity: .9; }
+  100% { transform: translate3d(var(--tx), var(--ty), -120px) scale(.3); opacity: 0; }
+}
+
+@keyframes borderShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Helper classes */
+.card-3d { perspective: 1200px; transform-style: preserve-3d; }
+.fade-in { animation: float-up 6s ease-in-out infinite; }
+.pop { animation: pop 360ms ease-out both; }
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.02) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2.2s linear infinite;
+}

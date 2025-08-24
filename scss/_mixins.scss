@@ -1,0 +1,53 @@
+// Responsive mixin and helpers
+@mixin respond($break) {
+  @if $break == xs {
+    @media (max-width: $break-xs) { @content; }
+  } @else if $break == sm {
+    @media (max-width: $break-sm) { @content; }
+  } @else if $break == md {
+    @media (max-width: $break-md) { @content; }
+  } @else if $break == lg {
+    @media (max-width: $break-lg) { @content; }
+  }
+}
+
+@mixin flex($jc: flex-start, $ai: center, $dir: row) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-direction: $dir;
+}
+
+@mixin card($pad: 18px, $radius: $radius) {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: $radius;
+  padding: $pad;
+  box-shadow: $shadow-card;
+  backface-visibility: hidden;
+}
+
+// 3D perspective wrapper
+@mixin perspective($size: 900px) {
+  perspective: $size;
+  transform-style: preserve-3d;
+}
+
+// hover tilt effect for interactive 3D feeling
+@mixin hover-tilt($max-rotate: 8deg, $scale: 1.02) {
+  transform-style: preserve-3d;
+  transition: transform $dur-medium cubic-bezier(.2,.9,.2,1), box-shadow $dur-medium;
+  will-change: transform;
+  &:hover {
+    transform: translateY(-10px) scale($scale) rotateX($max-rotate/3) rotateY(-$max-rotate/2);
+    box-shadow: $shadow-accent;
+  }
+}
+
+// utility to hide visually but accessible
+.hidden-visually {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}

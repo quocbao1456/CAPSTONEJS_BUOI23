@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin - Quản lý sản phẩm (Modern)</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <main class="container" style="padding-top:24px;">
+      <header class="header" style="position:relative;">
+        <div class="brand">
+          <div class="logo">ADM</div>
+          <div class="title">
+            <h1>Admin Panel</h1>
+            <p class="hint">Quản lý sản phẩm</p>
+          </div>
+        </div>
+        <div class="nav-actions">
+          <a class="btn ghost" href="index.html">Quay lại trang người dùng</a>
+        </div>
+      </header>
+
+      <section style="margin-top:18px;">
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
+          <input id="adminSearch" class="input" placeholder="Tìm theo tên..." />
+          <select id="adminSort" class="input">
+            <option value="default">Sắp xếp</option>
+            <option value="price-asc">Giá: thấp → cao</option>
+            <option value="price-desc">Giá: cao → thấp</option>
+          </select>
+          <button id="addProductBtn" class="btn">Thêm sản phẩm</button>
+        </div>
+
+        <table class="table" id="adminTable">
+          <thead>
+            <tr>
+              <th>Ảnh</th>
+              <th>Tên</th>
+              <th>Danh mục</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- Edit / Add modal -->
+      <div id="modal" style="display:none;position:fixed;inset:0;background:rgba(2, 27, 56, 0.7);place-items:center;display:grid;z-index:300;">
+        <form id="productForm" style="background:linear-gradient(180deg,rgb(221, 95, 170),rgba(114, 153, 227, 0.9));padding:20px;border-radius:12px;width:520px;max-width:92%;">
+          <h3 id="modalTitle">Thêm sản phẩm</h3>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <input class="input" name="title" placeholder="Tên sản phẩm" required />
+            <input class="input" name="image" placeholder="URL ảnh" />
+            <input class="input" name="category" placeholder="Danh mục" />
+            <input class="input" name="price" placeholder="Giá (số nguyên)" type="number" required />
+            <input class="input" name="qty" placeholder="Số lượng" type="number" value="10" />
+            <div style="display:flex;gap:8px;justify-content:flex-end;">
+              <button type="button" id="cancelModal" class="btn ghost">Hủy</button>
+              <button type="submit" class="btn">Lưu</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="footer-note">Dữ liệu được lưu tạm trong localStorage</div>
+    </main>
+
+    <script src="js/admin.js"></script>
+  </body>
+</html>

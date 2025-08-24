@@ -1,0 +1,54 @@
+// Main entry - imports partials
+@import 'variables';
+@import 'mixins';
+@import 'animations';
+@import 'base';
+@import 'layout';
+@import 'components';
+
+/* Page-level tweaks */
+.hero {
+  margin: 32px 0;
+  @include card(26px);
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 30px;
+  .left { max-width: 60%; h2 { margin: 0 0 8px 0; font-size: 32px; color: $accent-2;} p { margin: 0; color: $accent-2; } }
+  .right { width: 260px; height: 160px; border-radius: 14px; background: linear-gradient(120deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); display: grid; place-items: center; box-shadow: 0 18px 60px rgba(7,16,32,0.5); }
+  @include respond(sm) { flex-direction: column; .left { max-width: 100%; } }
+}
+
+/* Admin table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  th, td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px dashed rgba(255,255,255,0.03);
+    font-size: 14px;
+  }
+  th { color: $muted; font-weight: 700; font-size: 13px; }
+}
+
+/* Modal improvements */
+#productModal { display: none; }
+.modal {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,0.7);
+  z-index: 400;
+  .sheet {
+    width: 560px;
+    max-width: 94%;
+    padding: 20px;
+    border-radius: 12px;
+    @include card(18px);
+  }
+}
+
+/* small helpers for responsive */
+.footer-note { margin-top: 30px; color: $muted; font-size: 13px; text-align: center; }
